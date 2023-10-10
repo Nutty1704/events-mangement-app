@@ -1,0 +1,43 @@
+
+<html><!DOCTYPE html>
+
+<head>
+    <title>Delete Category</title>
+
+   <link href="/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="container m-3 mx-auto">
+        <div class="mt-4 p-5 bg-secondary text-dark rounded">
+            <h1 class="text-center text-light">Events Management App</h1>
+        </div>
+    </header>
+    <!-- End Header -->
+
+        <div class="album py-5">
+            <div class="container">
+                <h3 class="my-1 text-center">Delete Category</h3>
+                <h4 class="my-1 text-center">File in category ID & click submit</h4>
+            </div>
+        </div>
+                                    
+        <div class="row row-cols-1 row-cols-sm-2 g-3 justify-content-center">
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form action="/33048126/delete-category" method="POST">
+                            <div class="mb-3">
+                                <label for="categoryID" class="form-label">Category ID</label>
+                                <input type="text" name="categoryID" class="form-control" id="categoryID" placeholder="Enter category ID" required />
+                            </div>
+
+                            <button class="btn btn-danger" type="submit" name="submit">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
