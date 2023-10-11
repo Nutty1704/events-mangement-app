@@ -17,19 +17,6 @@ export class ListEventComponent {
     });
   }
 
-  getDurationString(event: any) {
-    let duration: number = event.duration;
-
-    let hours: number = Math.floor(duration / 60);
-    let minutes: number = duration % 60;
-
-    if (hours > 0) {
-      return `${hours} hours ${minutes} minutes`;
-    } else {
-      return `${minutes} minutes`;
-    }
-  }
-
   // TODO: modify this function to align with the events
   processCategoryIDs(event: any) {
     return event.categoryIds;
