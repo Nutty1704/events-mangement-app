@@ -1,0 +1,65 @@
+<main>
+    <div class="album py-5">
+        <div class="container">
+            <h3 class="my-2 text-center">Add Event</h3>
+
+            <div class="row row-cols-1 row-cols-sm-2 g-3 justify-content-center">
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="section">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Enter event name" [(ngModel)]="name" required />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Description</label>
+                                    <input type="text" name="description" class="form-control" id="desc" placeholder="Enter description" [(ngModel)]="description" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="image" class="form-label">Image</label>
+                                    <input type="text" name="image" class="form-control" id="image" placeholder="Enter image url" [(ngModel)]="image" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="startDateTime" class="form-label">Start DateTime</label>
+                                    <input type="datetime-local" name="startDateTime" class="form-control" id="startDateTime" placeholder="Enter Start Date and Time" [(ngModel)]="startDateTime" required />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="duration" class="form-label">Duration</label>
+                                    <input type="number" name="duration" class="form-control" id="duration" placeholder="Enter event duration in minutes" [(ngModel)]="duration" required />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="isActive" class="form-label">Is Active</label>
+                                    <br />
+                                    <input type="checkbox" name="isActive" id="isActive" [(ngModel)]="isActive" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="capacity" class="form-label">Capacity</label>
+                                    <input type="number" step="1" value="1000" name="capacity" class="form-control" id="capacity" placeholder="Enter capacity" [(ngModel)]="capacity" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="ticketsAvailable" class="form-label">Tickets Available</label>
+                                    <input type="number" name="ticketsAvailable" class="form-control" id="ticketsAvailable" placeholder="Enter tickets available" [(ngModel)]="ticketsAvailable" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="categoryIds" class="form-label">Category IDs</label>
+                                    <input type="text" name="categoryIds" class="form-control" id="categoryIds" placeholder="Enter Category ID" [(ngModel)]="categoryIds" required />
+                                </div>
+
+                                <button class="btn btn-primary" (click)="addEvent()">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
