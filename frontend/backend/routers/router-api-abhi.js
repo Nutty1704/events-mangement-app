@@ -33,6 +33,12 @@ const eventCont = require(path.join(__dirname, '..', 'controllers', 'event-contr
 const categoryCont = require(path.join(__dirname, '..', 'controllers', 'category-controller.js'));
 
 /**
+ * Controller for Stats
+ * @const
+ */
+const statsCont = require(path.join(__dirname, '..', 'controllers', 'stat-controller.js'));
+
+/**
  * POST route for /abhijit/api/v1/add-event
  * @name post/add-event
  * @function
@@ -115,6 +121,12 @@ router.put('/update-event', async (req, res) => {
     result = await eventCont.updateEvent(req.body.eventId, req.body.name, req.body.capacity);
     res.status(200).json(result);
 });
+
+
+router.get('/get-stats', async (req, res) => {
+    result = await statsCont.getStats();
+    res.status(200).json(result);
+})
 
 /**
  * Exports this router
