@@ -27,7 +27,7 @@ export class AddEventComponent {
       name: this.name,
       description: this.description === "" ? undefined : this.description,
       image: this.image === "" ? undefined : this.image,
-      startDateTime: this.startDateTime,
+      startDateTime: new Date(this.startDateTime),
       duration: this.duration,
       isActive: this.isActive !== "",
       capacity: this.capacity,
