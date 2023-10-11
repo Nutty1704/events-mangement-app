@@ -16,11 +16,11 @@
         <!-- End Display Tasks for Student #1 (Silin) -->
         <!-- Display Tasks for Student #2 (Abhijit) -->
         <div class="d-flex justify-content-around p-2">
-            <div><a routerLink="['/add-event']"><button class="btn btn-primary">Add Event</button></a></div>
-            <div><a routerLink="['/list-events']"><button class="btn btn-primary">List All Events</button></a></div>
+            <div><a [routerLink]="['add-event']"><button class="btn btn-primary">Add Event</button></a></div>
+            <div><a [routerLink]="['list-events']"><button class="btn btn-primary">List All Events</button></a></div>
             <div><a href="/abhijit/sold-out-events"><button class="btn btn-primary">List Sold Out Events</button></a></div>
             <div><a href="/abhijit/category/123"><button class="btn btn-primary">Category Detail Page</button></a></div>
-            <div><a href="/abhijit/event/remove"><button class="btn btn-primary">Delete Event By ID</button></a></div>
+            <div><a [routerLink]="['delete-event']"><button class="btn btn-primary">Delete Events</button></a></div>
         </div>
         <!-- End Display Tasks for Student #2 (Abhijit) -->
     </nav>
