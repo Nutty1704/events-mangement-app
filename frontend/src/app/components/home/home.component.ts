@@ -15,11 +15,17 @@ export class HomeComponent {
   updateCount: number = 0;
 
   constructor(private dbService: DatabaseService) { 
-    this.eventCount = this.dbService.getEventCount();
+    this.eventCount = this.dbService.getCategoryCount();
     this.categoryCount = this.dbService.getCategoryCount();
-    this.addCount = this.dbService.getAddCount();
-    this.deleteCount = this.dbService.getDeleteCount();
-    this.updateCount = this.dbService.getUpdateCount();
+
+    this.dbService.getRecordStats().subscribe({
+      next: (stats: any) => {
+        this.addCount = stats.recordsCreated
+        this.deleteCount = stats.recordsDeleted
+        this.updateCount = stats.recordsUpdated
+      },
+      error: (error: any) => {console.log(error)}
+    })
   }
 
 }
