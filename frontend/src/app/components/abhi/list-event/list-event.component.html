@@ -1,0 +1,39 @@
+<div class="album py-5">
+    <div class="container">
+        <div class="row row-cols-1 g-3">
+            <div class="col">
+                <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Start</th>
+                        <!-- <th scope="col">End</th> -->
+                        <th scope="col">Duration</th>
+                        <th scope="col">Is Active</th>
+                        <th scope="col">Capacity</th>
+                        <th scope="col">Tickets Available</th>
+                        <th scope="col">Categories</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <tr *ngFor="let event of events">
+                        <th scope="row">{{ event.id}}</th>
+                        <td>{{ event.name }}</td>
+                        <td>{{ event.startDateTime.toLocaleString() }}</td>
+                        <!-- <td>{{ event.getEndDateTime().toLocaleString() }}</td> -->
+                        <td>{{ getDurationString(event) }}</td>
+                        <td><input class="form-check-input" type="checkbox" [checked]="event.isActive" /></td>
+                        <td>{{ event.capacity }}</td>
+                        <td>{{ event.ticketsAvailable }}</td>
+                        <td>{{ processCategoryIDs(event) }}</td>
+                        <td><a [routerLink]="['/display-event', event.id]"><button class="btn btn-primary">View</button></a></td>
+                        </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    </div>
+</div>
