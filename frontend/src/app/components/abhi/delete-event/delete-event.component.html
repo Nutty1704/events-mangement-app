@@ -19,7 +19,6 @@
                         <th scope="col">Tickets Available</th>
                         <th scope="col">Categories</th>
                         <th scope="col">Actions</th>
-                        <th scope="col">Delete</th>
                       </tr>
                     </thead>
                     
@@ -34,7 +33,6 @@
                         <td>{{ event.capacity }}</td>
                         <td>{{ event.ticketsAvailable }}</td>
                         <td>{{ processCategoryIDs(event) }}</td>
-                        <td><a href="/33048126/event/{{ event.id }}"><button class="btn btn-primary">View</button></a></td>
                         <td><button type="submit" class="btn btn-danger" (click)="deleteEvent(event.id)">Delete</button></td>
                         </tr>
                     </tbody>
