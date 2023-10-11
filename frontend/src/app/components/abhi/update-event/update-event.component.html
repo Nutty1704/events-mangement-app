@@ -1,0 +1,66 @@
+<main>
+    <div class="album py-5">
+        <div class="container">
+            <h3 class="my-2 text-center">Update Event</h3>
+
+            <div class="row row-cols-1 row-cols-sm-2 g-3 justify-content-center">
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="section">
+
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Enter event name" [(ngModel)]="name" required />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="capacity" class="form-label">Capacity</label>
+                                    <input type="number" step="1" value="1000" name="capacity" class="form-control" id="capacity" placeholder="Enter capacity" [(ngModel)]="capacity" />
+                                </div>
+
+                                <button class="btn btn-primary" (click)="updateEvent()">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container d-flex flex-column align-items-sm-center">
+        <div>{{ message }}</div>
+    </div>
+
+    <div class="album py-5">
+        <div class="container">
+            <div class="row row-cols-1 g-3">
+                <div class="col">
+                    <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Start</th>
+                            <th scope="col">Duration</th>
+                            <th scope="col">Capacity</th>
+                          </tr>
+                        </thead>
+                        
+                        <tbody>
+                            <tr *ngFor="let event of events">
+                            <th scope="row">{{ event.id}}</th>
+                            <td>{{ event.name }}</td>
+                            <td>{{ event.startDateTime.toLocaleString() }}</td>
+                            <td>{{ event.duration }}</td>
+                            <td>{{ event.capacity }}</td>
+                            <td><button class="btn btn-primary" (click)="selectEvent(event.id)">Select</button></td>
+                            </tr>
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</main>
