@@ -21,16 +21,8 @@ export class DatabaseService {
     return this.http.get('/abhijit/api/v1/events');
   }
 
-  // TODO
   getEvent(id: String) {
-    let events: any[] = [];
-    this.getEvents().subscribe({
-      next: (result: any) => {events = result},
-      error: (error: any) => {console.log(error)}
-    });
-
-    let event: any = events.find((event) => event.id == id);
-    return event;
+    return this.http.get(`/abhijit/api/v1/get-event/${id}`);
   }
   
 
