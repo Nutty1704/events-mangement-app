@@ -33,8 +33,10 @@ export class UpdateEventComponent {
     }
   }
 
-  selectEvent(id: string) {
+  selectEvent(id: string, name: string, capacity: number) {
     this.eventId = id;
+    this.name = name;
+    this.capacity = capacity;
     this.message = "Selected Event: " + id;
   }
 
