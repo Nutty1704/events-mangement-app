@@ -1,0 +1,46 @@
+<div class="card shadow-sm">
+    <div class="card-body">
+        <div class="section">
+            <div class="mb-3">
+                <label for="text" class="form-label">Text to Transate</label>
+                <textarea type="text" rows="4" name="text" class="form-control" placeholder="Enter text to translate" [(ngModel)]="text" required></textarea>
+                <label class="text-danger">{{ emptyMessage }}</label>
+            </div>
+
+            <div class="mb-3">
+                <div>
+                    <label for="target-language" class="form-label">Target Language</label>
+                </div>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-outline-secondary" (click)="chooseFrench()">French</button>
+                    <button type="button" class="btn btn-outline-secondary" (click)="chooseDutch()">Dutch</button>
+                    <button type="button" class="btn btn-outline-secondary" (click)="chooseGerman()">German</button>
+                </div>
+                <div>
+                    <label for="target-language" class="form-label">Chosen Language: {{ target }}</label>
+                </div>       
+            </div>
+
+            <button class="btn btn-success" (click)="translate()">Translate</button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="results.length > 0">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Text</th>
+            <th scope="col">Target Language</th>
+            <th scope="col">Translation</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let result of results">
+            <td>{{ result.text }}</td>
+            <td>{{ result.target }}</td>
+            <td>{{ result.translation }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
