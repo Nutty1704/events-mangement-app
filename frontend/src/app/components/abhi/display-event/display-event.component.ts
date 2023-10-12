@@ -15,7 +15,7 @@ export class DisplayEventComponent {
     this.route.params.subscribe(params => {
       let id = params['id'];
       this.dbService.getEvent(id).subscribe({
-        next: (result: any) => {this.event = result; console.log(result);},
+        next: (result: any) => {this.event = result;},
         error: (error: any) => {this.router.navigate(['/invalid-data'])},
       });
     });

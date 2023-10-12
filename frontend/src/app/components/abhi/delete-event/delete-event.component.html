@@ -32,7 +32,13 @@
                         <td><input class="form-check-input" type="checkbox" [checked]="event.isActive" /></td>
                         <td>{{ event.capacity }}</td>
                         <td>{{ event.ticketsAvailable }}</td>
-                        <td>{{ processCategoryIDs(event) }}</td>
+                        <td>
+                          <div class="d-flex flex-row">
+                            <div class="m-1" *ngFor="let c of event.categoryList">
+                              <button>{{ c.name }}</button>
+                            </div>
+                          </div>
+                        </td>
                         <td><button type="submit" class="btn btn-danger" (click)="deleteEvent(event.id)">Delete</button></td>
                         </tr>
                     </tbody>

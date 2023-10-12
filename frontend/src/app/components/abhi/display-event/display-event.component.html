@@ -45,7 +45,11 @@
               </div>
               <div class="mb-3">
                 <h6 class="fw-bold">Category Id</h6>
-                <p>{{ event.categories }}</p>
+                <div class="d-flex flex-row">
+                  <div class="m-1" *ngFor="let c of event.categoryList">
+                    <button>{{ c.name }}</button>
+                  </div>
+                </div>
               </div>
             </div>
         </div>
