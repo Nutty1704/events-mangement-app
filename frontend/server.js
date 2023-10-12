@@ -23,23 +23,18 @@ const express = require('express');
  */
 const path = require('path');
 
-/**
- * ejs module
- * @const
- */
-const ejs = require('ejs');
 
 /**
  * Router for Student #2 (Abhijit Upadhyay)
  * @const
  */
-const routerAbhi = require(path.join(__dirname, 'routers', 'router-abhi.js'));
+const routerAbhi = require(path.join(__dirname, 'backend' ,'routers', 'router-abhi.js'));
 
 /**
  * Router for Student #1 (Silin Xu)
  * @const
  */
-const routerSilin = require(path.join(__dirname, 'routers', 'router-silin.js'));
+const routerSilin = require(path.join(__dirname, 'backend' ,'routers', 'router-silin.js'));
 
 /**
  * Port number
@@ -60,34 +55,46 @@ const mongoose = require('mongoose');
 const url = 'mongodb://127.0.0.1:27017/assignment2';
 
 /**
- * Event controller
- * @const
- */
-const eventCont = require(path.join(__dirname, 'controllers', 'event-controller.js'));
-
-
-/**
- * Category controller
- * @const
- */
-const categoryCont = require(path.join(__dirname, 'controllers', 'category-controller.js'));
-
-/**
  * Stats controller
  * @const
  */
-const statsCont = require(path.join(__dirname, 'controllers', 'stat-controller.js'));
+const statsCont = require(path.join(__dirname, 'backend' ,'controllers', 'stat-controller.js'));
 
 /**
  * Exrpress application
  */
 let app = express();
 
+/**
+ * Server
+ * @const
+ */
+const server = require('http').Server(app);
+
+/**
+ * Socket.io
+ * @const
+ */
+const io = require("socket.io")(server);
+
+/**
+ * Google Translate
+ * @const
+ */
+const {Translate} = require('@google-cloud/translate').v2;
+
+/**
+ * Tranlate Client
+ * @const
+ */
+const translate = new Translate();
+
+
 app.use(express.static("node_modules/bootstrap/dist/css"));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("images"));
+app.use(express.static(path.join(__dirname, 'backend', 'images')));
 app.use(express.json());
-app.engine('html', ejs.renderFile);
+app.use(express.static(path.join(__dirname, 'dist', 'frontend')));
 app.set('view engine', 'html');
 
 /**
@@ -107,36 +114,19 @@ app.use('/abhijit', routerAbhi);
 app.use('/33048126', routerSilin);
 
 /**
- * Route serving the home page
- * @name get/
+ * Socket.io connection
  * @function
- * @param {string} path - Express path
- * @param {function} callback - Express callback
+ * @param {string} connection - Socket.io connection event
+ * @param {function} callback - Socket.io callback
  */
-app.get('/', async (req, res) => {
-    let eventCount = await eventCont.getCount();
-    let categoryCount = await categoryCont.getCount();
-    let stats = await statsCont.getStats();
+io.on("connection", function(socket) {
 
-    res.render('index', 
-    {eventCount: eventCount, 
-    categoryCount: categoryCount,
-    addCount: stats.recordsCreated,
-    deleteCount: stats.recordsDeleted,
-    updateCount: stats.recordsUpdated});
-});
-
-/**
- * Route serving invalid requests
- * @name get/*
- * @function
- * @param {string} path - Express path
- * @param {function} callback - Express callback
- */
-app.get("*", function (req, res) {
-	res.render("404");
-});
-
+    socket.on("translate", async (data) => {
+        const [translation] = await translate.translate(data.text, data.target);
+        socket.emit("translated", translation);
+    })
+    
+})
 
 /**
  * Express application listening on port 8080
@@ -145,7 +135,7 @@ app.get("*", function (req, res) {
  * @param {number} port - Port number
  * @param {function} callback - Express callback
  */
-app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
+server.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
 
 /**
  * A function to connect to the database
