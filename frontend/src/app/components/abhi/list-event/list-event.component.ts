@@ -12,14 +12,8 @@ export class ListEventComponent {
   constructor(private dbService: DatabaseService) { 
     this.dbService.getEvents().subscribe({
       next: (result: any) => {this.events = result},
-      // TODO: redirect to error page
       error: (error: any) => {console.log(error)}
     });
-  }
-
-  // TODO: modify this function to align with the events
-  processCategoryIDs(event: any) {
-    return event.categoryIds;
   }
 
 }
