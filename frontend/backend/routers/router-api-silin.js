@@ -143,7 +143,6 @@ router.get('/get-category/:id', async (req, res) => {
     }
 })
 
-
 /**
  * Exports this router
  */
