@@ -18,13 +18,12 @@
                     <tbody>
                         <tr *ngFor="let category of records">
                             <td>{{ category.id }}</td>
-                            <td>{{ category.name }}</td>
+                            <td>{{ category.name|upperCase }}</td>
                             <td>{{ category.description }}</td>
                             <td>{{ category.image }} </td>
                             <td><img src="{{ category.image }}" height="25%" /></td>
                             <td>{{ category.date.toLocaleString() }} </td>
-                            <!-- TODO -->
-                            <td><a href="/backends/abhijit/category/{{ category.id }}"><button class="btn btn-primary">View</button></a></td>
+                            <td><a [routerLink]="['/display-category', category.id]"><button class="btn btn-primary">View</button></a></td>
                         </tr>
                     </tbody>
                     </table>

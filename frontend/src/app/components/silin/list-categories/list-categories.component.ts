@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DatabaseService } from 'src/app/services/database.service';
+import { UpperCasePipe } from '@angular/common';
 
 
 @Component({
