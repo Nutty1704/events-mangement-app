@@ -1,0 +1,19 @@
+<div class="card shadow-sm">
+    <div class="card-body">
+        <div class="section">
+            <div class="mb-3">
+                <label for="text" class="form-label">Text to Convert</label>
+                <textarea type="text" rows="4" name="text" class="form-control" placeholder="Enter text to convert" [(ngModel)]="text" required></textarea>
+                <label class="text-danger">{{ emptyMessage }}</label>
+            </div>
+
+            <button class="btn btn-success" (click)="convert()">Convert To speech</button>
+           
+            </div>
+                
+            <audio id="music" preload="true" controls src={{path}}>
+                
+            </audio>
+        </div>
+    </div>
+

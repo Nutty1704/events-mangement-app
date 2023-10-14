@@ -45,18 +45,36 @@ export class DatabaseService {
     return this.http.put('/abhijit/api/v1/update-event', body, httpOptions);
   }
 
-  // TODO: implement this
-  getEventCount() {
-    return 10;
-  }
-
-  // TODO: implement this
-  getCategoryCount() {
-    return 10;
+  getRecordStatsG1() {
+    console.log("get recorded G1")
+    return this.http.get('/33048126/api/v1/get-statsG1');
   }
 
   getRecordStats() {
     return this.http.get('/abhijit/api/v1/get-stats');
+  }
+
+
+  addCategory(data: any) {
+    return this.http.post('/33048126/api/v1/add-category', data, httpOptions);
+  }
+
+  getCategories() {
+    return this.http.get("/33048126/api/v1/categories");
+  }
+
+  deleteCategory(id: string) {
+    let body: any = {categoryId: id};
+    return this.http.delete("/33048126/api/v1/delete-category", {body: body, headers: httpOptions.headers});
+  }
+
+  updateCategory(id: string, name: string, description: string, image:string) {
+    let body: any = {categoryId: id, name: name, description: description, image: image };
+    return this.http.put('/33048126/api/v1/update-category', body, httpOptions);
+  }
+
+  getCategory(id: string) {
+    return this.http.get(`/33048126/api/v1/get-category/${id}`);
   }
 
 }
