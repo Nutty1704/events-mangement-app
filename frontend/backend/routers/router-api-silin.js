@@ -32,6 +32,8 @@ const eventCont = require(path.join(__dirname, '..', 'controllers', 'event-contr
  */
 const categoryCont = require(path.join(__dirname, '..', 'controllers', 'category-controller.js'));
 
+const statsCont = require(path.join(__dirname, '..', 'controllers', 'stat-controller.js'));
+
 
 /**
  * GET route for /33048126/api/v1/categories
@@ -78,8 +80,18 @@ router.post('/add-category', async function (req,res){
         eventsList: events
     }
 
-    let newCategoryId = await categoryCont.addCategory(data);
-    res.status(201).json(newCategoryId)
+    try{
+        let newCategoryId = await categoryCont.addCategory(data);
+        res.status(201).json(newCategoryId)
+    } catch (err) {
+        let errorMessages = [];
+        for (let key of Object.keys(err.errors)) {
+            errorMessages.push(err.errors[key].message);
+        }
+
+        let errorStatus = {message: errorMessages.join(', ')};
+        res.status(400).json(errorStatus);
+    }
 })
 
 /**
@@ -104,9 +116,32 @@ router.delete('/delete-category', async (req, res) => {
 router.put('/update-category', async (req, res) => {
     result = await categoryCont.updateCategory(req.body.categoryId,
          req.body.name, 
-         req.body.description);
+         req.body.description,
+         req.body.image);
     res.status(200).json(result);
 });
+
+router.get('/get-statsG1', async (req, res) => {
+    try {
+      data = {};
+      data.eventCount = await eventCont.getCount();
+      data.categoryCount = await categoryCont.getCount();
+      res.status(200).json(data);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'server error' });
+    }
+  });
+
+
+router.get('/get-category/:id', async (req, res) => {
+    let category =  await categoryCont.getOneCategory({ id: req.params.id });
+    if (category) {
+        res.status(200).json(category);
+    } else {
+        res.status(400).json({message: 'Category not found'});
+    }
+})
 
 
 /**

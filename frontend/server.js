@@ -89,12 +89,19 @@ const {Translate} = require('@google-cloud/translate').v2;
  */
 const translate = new Translate();
 
+const fs = require("fs");
+
+// Imports the Google Cloud client library
+const textToSpeech = require("@google-cloud/text-to-speech");
+const client = new textToSpeech.TextToSpeechClient();
+
 
 app.use(express.static("node_modules/bootstrap/dist/css"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'backend', 'images')));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'dist', 'frontend')));
+app.use(express.static(path.join(__dirname, 'audio-files')));
 app.set('view engine', 'html');
 
 /**
@@ -125,8 +132,33 @@ io.on("connection", function(socket) {
         const [translation] = await translate.translate(data.text, data.target);
         socket.emit("translated", translation);
     })
+
+    socket.on("convert", async text => {
+        const request = {
+          input: { text: text },
+          voice: { languageCode: "en-US", ssmlGender: "NEUTRAL" },
+          audioConfig: { audioEncoding: "MP3" },
+        };
     
+        // Performs the Text-to-Speech request
+        client.synthesizeSpeech(request, (err, response) => {
+            if (err) {
+            console.error("ERROR:", err);
+            return;
+            }
+  
+            // Write the binary audio content to a local file
+            fs.writeFile("audio-files/output.mp3", response.audioContent, "binary", err => {
+                if (err) {
+                    console.error("ERROR:", err);
+                    return;
+                }
+                socket.emit('converted', "output.mp3");
+            });
+        })
+    })
 })
+
 
 /**
  * Express application listening on port 8080

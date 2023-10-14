@@ -128,10 +128,10 @@ module.exports = {
      * @returns {Object} result of the update operation
      */
 
-    updateCategory: async function (categoryId, newName, newDescription) {
+    updateCategory: async function (categoryId, newName, newDescription, newImage) {
         statusObject = {status: "ID not found"};
 
-        result = await Category.updateOne({ id: categoryId}, { $set: {name: newName, description: newDescription} });
+        result = await Category.updateOne({ id: categoryId}, { $set: {name: newName, description: newDescription, image: newImage} });
 
         if (result.matchedCount > 0) {
             statusObject.status = "ID found";
