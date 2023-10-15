@@ -26,7 +26,7 @@ export class UpdateEventComponent {
     if (this.eventId !== "") {
       this.dbService.updateEvent(this.eventId, this.name, this.capacity).subscribe({
         next: (result: any) => {this.router.navigate(['/list-events'])},
-        error: (error: any) => {console.log(error)}
+        error: (error: any) => {this.router.navigate(['/invalid-data'])}
       });
     } else {
       this.message = "Please select an event to update.";
