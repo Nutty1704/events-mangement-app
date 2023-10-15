@@ -13,6 +13,8 @@ export class DatabaseService {
 
   constructor(private http: HttpClient) { }
 
+  // Methods for student 2 (Abhijit Upadhyay)
+
   addEvent(data: any) {
     return this.http.post('/abhijit/api/v1/add-event', data, httpOptions);
   }
@@ -37,15 +39,17 @@ export class DatabaseService {
     return this.http.put('/abhijit/api/v1/update-event', body, httpOptions);
   }
 
-  getRecordStatsG1() {
-    console.log("get recorded G1")
-    return this.http.get('/33048126/api/v1/get-statsG1');
-  }
-
   getRecordStats() {
     return this.http.get('/abhijit/api/v1/get-stats');
   }
 
+
+  // Methods for student 1 (Silin Xu)
+
+  getRecordStatsG1() {
+    console.log("get recorded G1")
+    return this.http.get('/33048126/api/v1/get-statsG1');
+  }
 
   addCategory(data: any) {
     return this.http.post('/33048126/api/v1/add-category', data, httpOptions);
