@@ -1,12 +1,15 @@
 <div class="album py-5">
   <div class="container">
 
-      
-      <h3 class="my-2 text-center text-dark">{{ event.name}}</h3>
+      <img class="card-img-top" src="{{ event.image }}" alt="Event Image">
 
       <div class="px-4 pt-3 container-fluid">
         <div class="card shadow">
             <div class="card-body">
+              <div class="mb-3">
+                <h6 class="fw-bold">Object Id</h6>
+                <p>{{ event._id }}</p>
+              </div>
               <div class="mb-3">
                 <h6 class="fw-bold">Event Id</h6>
                 <p>{{ event.id }}</p>
