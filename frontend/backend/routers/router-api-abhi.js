@@ -73,7 +73,7 @@ router.post('/add-event', async (req, res) => {
 
     try {
         newEventId = await eventCont.addEvent(data);
-        res.status(201).json(newEventId);
+        res.status(201).json({eventId: newEventId});
     } catch (err) {
         let errorStatus = getErrorMessages(err);
         res.status(400).json(errorStatus);
