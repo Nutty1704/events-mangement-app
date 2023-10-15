@@ -12,7 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './components/header/header.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { HomeComponent } from './components/home/home.component';
-// import { DisplayEventComponent } from './components/abhi/display-event/display-event.component';
+import { DisplayEventComponent } from './components/abhi/display-event/display-event.component';
 import { UpdateEventComponent } from './components/abhi/update-event/update-event.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DurationFormatPipe } from './pipes/duration-format.pipe';
@@ -33,15 +33,15 @@ import { StatsG1Component } from './components/silin/stats-g1/stats-g1.component
 
 
 const routes: Routes = [
+  // Paths for student 2 (Abhijit Upadhyay)
   { path: 'add-event', component: AddEventComponent },
   { path: 'list-events', component: ListEventComponent },
   { path: 'delete-event', component: DeleteEventComponent},
-  // { path: 'display-event/:id', component: DisplayEventComponent},
+  { path: 'display-event/:id', component: DisplayEventComponent},
   { path: 'update-event', component: UpdateEventComponent },
   { path: 'translate', component: TranslateComponent},
   { path: 'stats-g2', component: StatsG2Component },
-  { path: 'invalid-data', component: InvalidDataComponent},
-  // Paths for student 1
+  // Paths for student 1 (Silin Xu)
   { path: 'add-category', component: AddCategoryComponent },
   { path: 'list-categories', component: ListCategoriesComponent },
   { path: 'delete-category',component:DeleteCategoryComponent},
@@ -49,7 +49,9 @@ const routes: Routes = [
   { path: 'text-to-speech', component:TextToSpeechComponent},
   { path: 'display-category/:id',component:DisplayCategoryComponent},
   { path: 'stats-g1', component: StatsG1Component },
+  // Paths for Team Tasks
   { path: '', component: HomeComponent },
+  { path: 'invalid-data', component: InvalidDataComponent},
   { path: '**', component: PageNotFoundComponent},
 ]
 
@@ -62,7 +64,7 @@ const routes: Routes = [
     HeaderComponent,
     PageNotFoundComponent,
     HomeComponent,
-    // DisplayEventComponent,
+    DisplayEventComponent,
     UpdateEventComponent,
     FooterComponent,
     DurationFormatPipe,
