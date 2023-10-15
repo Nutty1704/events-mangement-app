@@ -6,6 +6,7 @@
  * express module
  * @const
  */
+const { error } = require('console');
 const express = require('express');
 
 /**
@@ -75,12 +76,7 @@ router.post('/add-event', async (req, res) => {
         newEventId = await eventCont.addEvent(data);
         res.status(201).json(newEventId);
     } catch (err) {
-        let errorMessages = [];
-        for (let key of Object.keys(err.errors)) {
-            errorMessages.push(err.errors[key].message);
-        }
-
-        let errorStatus = {message: errorMessages.join(', ')};
+        let errorStatus = getErrorMessages(err);
         res.status(400).json(errorStatus);
     }
 
@@ -94,8 +90,12 @@ router.post('/add-event', async (req, res) => {
  * @param {function} callback - Express callback
  */
 router.get('/events', async (req, res) => {
-    let events = await eventCont.getAllEvents();
-    res.status(200).json(events);
+    try {
+        let events = await eventCont.getAllEvents();
+        res.status(200).json(events);
+    } catch (err) {
+        res.status(400).json(err);
+    }
 })
 
 /**
@@ -106,8 +106,12 @@ router.get('/events', async (req, res) => {
  * @param {function} callback - Express callback
  */
 router.delete('/delete-event', async (req, res) => {
-    result = await eventCont.deleteEvent(req.body.eventId);
-    res.status(200).json(result);
+    try {
+        result = await eventCont.deleteEvent(req.body.eventId);
+        res.status(200).json(result);
+    } catch (err) {
+        res.status(400).json(err);
+    }
 })
 
 /**
@@ -119,7 +123,12 @@ router.delete('/delete-event', async (req, res) => {
  */
 router.put('/update-event', async (req, res) => {
     result = await eventCont.updateEvent(req.body.eventId, req.body.name, req.body.capacity);
-    res.status(200).json(result);
+
+    if (result.status !== 'update failed') {
+        res.status(200).json(result);
+    } else {
+        res.status(400).json(result);
+    }
 });
 
 /**
@@ -130,8 +139,12 @@ router.put('/update-event', async (req, res) => {
  * @param {function} callback - Express callback
  */
 router.get('/get-stats', async (req, res) => {
-    result = await statsCont.getStats();
-    res.status(200).json(result);
+    try{
+        result = await statsCont.getStats();
+        res.status(200).json(result);
+    } catch (err) {
+        res.status(400).json(err);
+    }
 })
 
 /**
@@ -149,6 +162,17 @@ router.get('/get-event/:id', async (req, res) => {
         res.status(400).json({message: 'Event not found'});
     }
 })
+
+
+function getErrorMessages(err) {
+    let errorMessages = [];
+    for (let key of Object.keys(err.errors)) {
+        errorMessages.push(err.errors[key].message);
+    }
+
+    let errorStatus = {message: errorMessages.join(', ')};
+    return errorStatus;
+}
 
 /**
  * Exports this router
