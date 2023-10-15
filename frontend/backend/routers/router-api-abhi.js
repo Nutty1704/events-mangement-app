@@ -122,10 +122,32 @@ router.put('/update-event', async (req, res) => {
     res.status(200).json(result);
 });
 
-
+/**
+ * GET route for /abhijit/api/v1/get-stats
+ * @name get/get-stats
+ * @function
+ * @param {string} path - Express path
+ * @param {function} callback - Express callback
+ */
 router.get('/get-stats', async (req, res) => {
     result = await statsCont.getStats();
     res.status(200).json(result);
+})
+
+/**
+ * GET route for /abhijit/api/v1/get-event/:id
+ * @name get/get-event/:id
+ * @function
+ * @param {string} path - Express path
+ * @param {function} callback - Express callback
+ */
+router.get('/get-event/:id', async (req, res) => {
+    let event =  await eventCont.getOneEvent({ id: req.params.id });
+    if (event) {
+        res.status(200).json(event);
+    } else {
+        res.status(400).json({message: 'Event not found'});
+    }
 })
 
 /**
