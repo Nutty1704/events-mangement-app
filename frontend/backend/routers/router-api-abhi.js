@@ -6,7 +6,6 @@
  * express module
  * @const
  */
-const { error } = require('console');
 const express = require('express');
 
 /**
