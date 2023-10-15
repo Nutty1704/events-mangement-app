@@ -53,7 +53,7 @@
                             <th scope="row">{{ event.id}}</th>
                             <td>{{ event.name }}</td>
                             <td>{{ event.startDateTime|dateToString }}</td>
-                            <td>{{ event.duration }}</td>
+                            <td>{{ event.duration|durationFormat }}</td>
                             <td>{{ event.capacity }}</td>
                             <td><button class="btn btn-primary" (click)="selectEvent(event.id, event.name, event.capacity)">Select</button></td>
                             </tr>
