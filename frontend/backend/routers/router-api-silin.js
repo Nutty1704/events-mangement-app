@@ -121,6 +121,13 @@ router.put('/update-category', async (req, res) => {
     res.status(200).json(result);
 });
 
+/**
+ * GET route for /33048126/api/v1/get-statsG1
+ * @name get/get-statsG1
+ * @function
+ * @param {string} path - Express path
+ * @param {function} callback - Express callback
+ */
 router.get('/get-statsG1', async (req, res) => {
     try {
       data = {};
@@ -134,6 +141,13 @@ router.get('/get-statsG1', async (req, res) => {
   });
 
 
+/**
+ * GET route for /33048126/api/v1/get-category/:id
+ * @name get/get-category/:id
+ * @function
+ * @param {string} path - Express path
+ * @param {function} callback - Express callback
+ */
 router.get('/get-category/:id', async (req, res) => {
     let category =  await categoryCont.getOneCategory({ id: req.params.id });
     if (category) {
