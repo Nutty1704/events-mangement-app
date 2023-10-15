@@ -134,6 +134,10 @@ module.exports = {
     updateEvent: async function (eventId, newName, newCapacity) {
         statusObject = {status: "update failed"};
 
+        if (!newName || newCapacity < 10 || newCapacity > 2000) {
+            return statusObject;
+        }
+
         result = await Event.updateOne({ id: eventId}, { $set: {name: newName, capacity: newCapacity} });
 
         if (result.matchedCount > 0) {
